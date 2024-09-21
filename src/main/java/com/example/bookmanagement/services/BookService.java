@@ -11,35 +11,40 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-    private final BookRepository bookRepository;
-
     @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    private BookRepository bookRepository;
 
+    // Get all books
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
+    // Get book by ID
     public Optional<Book> getBookById(Long id) {
         return bookRepository.findById(id);
     }
 
+    // Add a new book
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
-    }
-
-    public Book updateBook(Long id, Book updatedBook) {
+    // Update a book
+    public Optional<Book> updateBook(Long id, Book updatedBook) {
         return bookRepository.findById(id).map(book -> {
             book.setTitle(updatedBook.getTitle());
             book.setAuthor(updatedBook.getAuthor());
             book.setIsbn(updatedBook.getIsbn());
             return bookRepository.save(book);
-        }).orElseThrow(() -> new RuntimeException("Book not found"));
+        });
+    }
+
+    // Delete a book
+    public boolean deleteBook(Long id) {
+        if (bookRepository.existsById(id)) {
+            bookRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

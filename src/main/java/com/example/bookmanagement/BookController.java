@@ -1,6 +1,7 @@
 package com.example.bookmanagement;
 
 import com.example.bookmanagement.entities.Book;
+import com.example.bookmanagement.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

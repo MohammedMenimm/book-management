@@ -1,7 +1,8 @@
 package com.example.bookmanagement.entities;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.util.List;
+
 @Entity
 public class Genre {
 
@@ -15,8 +16,7 @@ public class Genre {
     private List<Book> books;
 
     // Constructors, getters, setters
-    public Genre() {
-    }
+    public Genre() {}
 
     public Genre(String name) {
         this.name = name;

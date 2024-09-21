@@ -14,37 +14,30 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    // Get all books
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    // Existing methods ...
+
+    // Search books by title
+    public List<Book> searchBooksByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
     }
 
-    // Get book by ID
-    public Optional<Book> getBookById(Long id) {
-        return bookRepository.findById(id);
+    // Search books by author
+    public List<Book> searchBooksByAuthor(String author) {
+        return bookRepository.findByAuthorContainingIgnoreCase(author);
     }
 
-    // Add a new book
-    public Book saveBook(Book book) {
-        return bookRepository.save(book);
+    // Search books by genre
+    public List<Book> searchBooksByGenre(String genre) {
+        return bookRepository.findByGenre(genre);
     }
 
-    // Update a book
-    public Optional<Book> updateBook(Long id, Book updatedBook) {
-        return bookRepository.findById(id).map(book -> {
-            book.setTitle(updatedBook.getTitle());
-            book.setAuthor(updatedBook.getAuthor());
-            book.setIsbn(updatedBook.getIsbn());
-            return bookRepository.save(book);
-        });
+    // Filter books by published year
+    public List<Book> filterBooksByPublishedYear(int year) {
+        return bookRepository.findByPublishedYear(year);
     }
 
-    // Delete a book
-    public boolean deleteBook(Long id) {
-        if (bookRepository.existsById(id)) {
-            bookRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    // Filter books by genre and published year
+    public List<Book> filterBooksByGenreAndYear(String genre, int year) {
+        return bookRepository.findByGenreAndPublishedYear(genre, year);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bookmanagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -13,15 +14,10 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genres")
+    @JsonIgnore // Ignore the books field in JSON serialization
     private List<Book> books;
 
-    // Constructors, getters, setters
-    public Genre() {}
-
-    public Genre(String name) {
-        this.name = name;
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }

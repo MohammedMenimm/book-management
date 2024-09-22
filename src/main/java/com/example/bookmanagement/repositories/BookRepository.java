@@ -21,10 +21,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b JOIN b.genres g WHERE g.name = :genreName")
     List<Book> findByGenre(@Param("genreName") String genreName);
 
-    // Filter by published year
-    List<Book> findByPublishedYear(int publishedYear);
-
-    // Filter by both published year and genre
-    @Query("SELECT b FROM Book b JOIN b.genres g WHERE g.name = :genreName AND b.publishedYear = :publishedYear")
-    List<Book> findByGenreAndPublishedYear(@Param("genreName") String genreName, @Param("publishedYear") int publishedYear);
 }

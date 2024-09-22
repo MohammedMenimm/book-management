@@ -14,7 +14,7 @@ public class Book {
     private String author;
     private String isbn;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)  // Add CascadeType.ALL if not already present
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),
